@@ -1,0 +1,11 @@
+version: '3.7'
+services:
+    main:
+        image: docker.pupuk-kujang.co.id/dwidev/jobdescapi:latest
+        ports:
+            - '8092:4000'
+        restart: always
+        environment:
+            - TZ=Asia/Jakarta
+        env_file:
+            - .env
