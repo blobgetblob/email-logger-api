@@ -21,7 +21,6 @@ export class AssetsService {
 	async findAll(identity: any) {
 		const all = []
 		const allRaw = await this.itemRepository.find({
-			order: { asset_id: 'ASC' },
 			where: {
 				deleted: false,
 			},
@@ -48,6 +47,7 @@ export class AssetsService {
 				} catch (_) {}
 			}),
 		)
+		all.sort((a, b) => a.asset_id - b.asset_id)
 		return all
 	}
 
@@ -107,7 +107,7 @@ export class AssetsService {
 			assetOne.size_value = size_value
 			assetOne.updated_at = new Date()
 			assetOne.updated_by = identity.EMPLOYEEID
-			//await this.assetRepository.update(assetOne)
+			await this.assetRepository.save(assetOne)
 		} else {
 			const createAsset = this.assetRepository.create({})
 			createAsset.no_badge = identity.EMPLOYEEID
