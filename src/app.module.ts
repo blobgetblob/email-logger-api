@@ -6,8 +6,8 @@ import { AppController } from './app.controller'
 import { AppService } from './app.service'
 import { AuthController } from './auth/auth.controller'
 import { GatekeeperMiddleware } from './common/middlewares/gatekeeper.middleware'
-import { DocumentsController } from './documents/documents.controller'
-import { DocumentsModule } from './documents/documents.module'
+import { DocumentsModule } from './assets/assets.module'
+import { AssetsController } from './assets/assets.controller'
 
 @Module({
 	imports: [
@@ -30,6 +30,6 @@ import { DocumentsModule } from './documents/documents.module'
 })
 export class AppModule implements NestModule {
 	configure(consumer: MiddlewareConsumer) {
-		consumer.apply(GatekeeperMiddleware).forRoutes(AuthController, DocumentsController)
+		consumer.apply(GatekeeperMiddleware).forRoutes(AuthController, AssetsController)
 	}
 }

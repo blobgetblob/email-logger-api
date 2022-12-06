@@ -3,7 +3,7 @@ import * as dateFns from 'date-fns'
 
 @Injectable()
 export class AppService {
-	getHello() {
+	async getHello() {
 		return { identifier: 'EMPA API', datetime: dateFns.format(new Date(), 'yyyy-MM-dd HH:mm:ss') }
 	}
 }
