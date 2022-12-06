@@ -10,6 +10,11 @@ export class AssetsController {
 		return this.assetsService.findAll(res.locals.identity)
 	}
 
+	@Get('/not_filled/')
+	async findAllNotFilled(@Res({ passthrough: true }) res: any) {
+		return this.assetsService.findAll(res.locals.identity, true)
+	}
+
 	@Get(':id/')
 	async findOne(@Res({ passthrough: true }) res: any, @Param('id') id: string) {
 		return this.assetsService.findOne(res.locals.identity, id)

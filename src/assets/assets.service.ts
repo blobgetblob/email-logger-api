@@ -18,7 +18,7 @@ export class AssetsService {
 		private readonly demplonService: DemplonService,
 	) {}
 
-	async findAll(identity: any) {
+	async findAll(identity: any, not_filled_only: boolean = false) {
 		const all = []
 		const allRaw = await this.itemRepository.find({
 			where: {
@@ -43,7 +43,13 @@ export class AssetsService {
 						},
 					})
 					val.asset = assetOne ? assetOne : null
-					all.push(val)
+					if (not_filled_only) {
+						if (!assetOne) {
+							all.push(val)
+						}
+					} else {
+						all.push(val)
+					}
 				} catch (_) {}
 			}),
 		)
