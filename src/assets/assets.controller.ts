@@ -45,6 +45,6 @@ export class AssetsController {
 		@Body('size_value') size_value: string,
 	) {
 		const unhash = atob(hash)
-		return this.assetsService.findOne({ EMPLOYEEID: unhash }, id)
+		return this.assetsService.patchOne({ EMPLOYEEID: unhash }, id, size_value)
 	}
 }
