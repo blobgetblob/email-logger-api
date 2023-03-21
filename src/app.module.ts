@@ -30,6 +30,6 @@ import { AssetsController } from './assets/assets.controller'
 })
 export class AppModule implements NestModule {
 	configure(consumer: MiddlewareConsumer) {
-		consumer.apply(GatekeeperMiddleware).forRoutes(AuthController, AssetsController)
+		consumer.apply(GatekeeperMiddleware).exclude('(.*)/public/(.*)', '/').forRoutes('*')
 	}
 }
