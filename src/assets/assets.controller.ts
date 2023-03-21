@@ -21,6 +21,12 @@ export class AssetsController {
 		return this.assetsService.findAll({ EMPLOYEEID: unhash })
 	}
 
+	@Get('/public/:hash/not_filled/')
+	async findAllNotFilledPublic(@Res({ passthrough: true }) res: any, @Param('hash') hash: string) {
+		const unhash = atob(hash)
+		return this.assetsService.findAll({ EMPLOYEEID: unhash }, true)
+	}
+
 	@Get(':id/')
 	async findOne(@Res({ passthrough: true }) res: any, @Param('id') id: string) {
 		return this.assetsService.findOne(res.locals.identity, id)
