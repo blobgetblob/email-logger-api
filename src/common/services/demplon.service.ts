@@ -14,4 +14,19 @@ export class DemplonService {
 			return null
 		}
 	}
+
+	async miscAnnouncementSeen(announcement_id: string, employee_id: string) {
+		const res = await axios.post(
+			process.env.DEMPLON_API + 'misc/announcements/seen/',
+			new URLSearchParams({
+				id_announcement: announcement_id,
+				id_target: employee_id,
+			}),
+		)
+		if (res && res.data && res.data.success) {
+			return res.data
+		} else {
+			return null
+		}
+	}
 }

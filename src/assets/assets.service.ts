@@ -18,6 +18,8 @@ export class AssetsService {
 		private readonly demplonService: DemplonService,
 	) {}
 
+	private readonly announcement_id = '92'
+
 	async findAll(identity: any, not_filled_only: boolean = false) {
 		const all = []
 		const allRaw = await this.itemRepository.find({
@@ -54,6 +56,13 @@ export class AssetsService {
 			}),
 		)
 		all.sort((a, b) => a.asset_id - b.asset_id)
+
+		if (not_filled_only && all.length == 0) {
+			this.demplonService.miscAnnouncementSeen(this.announcement_id, identity.EMPLOYEEID)
+			this.demplonService.miscAnnouncementSeen(this.announcement_id, identity.EMPLOYEEID)
+			this.demplonService.miscAnnouncementSeen(this.announcement_id, identity.EMPLOYEEID)
+		}
+
 		return all
 	}
 
@@ -123,6 +132,15 @@ export class AssetsService {
 			createAsset.created_by = identity.EMPLOYEEID
 			await this.assetRepository.save(createAsset)
 		}
+
+		const not_filled_only = await this.findAll(identity, true)
+
+		if (not_filled_only.length == 0) {
+			this.demplonService.miscAnnouncementSeen(this.announcement_id, identity.EMPLOYEEID)
+			this.demplonService.miscAnnouncementSeen(this.announcement_id, identity.EMPLOYEEID)
+			this.demplonService.miscAnnouncementSeen(this.announcement_id, identity.EMPLOYEEID)
+		}
+
 		return await this.findOne(identity, id)
 	}
 }
