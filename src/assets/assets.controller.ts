@@ -38,7 +38,12 @@ export class AssetsController {
 	}
 
 	@Patch('/public/:hash/:id/')
-	async patchOnePublic(@Res({ passthrough: true }) res: any, @Param('hash') hash: string, @Param('id') id: string) {
+	async patchOnePublic(
+		@Res({ passthrough: true }) res: any,
+		@Param('hash') hash: string,
+		@Param('id') id: string,
+		@Body('size_value') size_value: string,
+	) {
 		const unhash = atob(hash)
 		return this.assetsService.findOne({ EMPLOYEEID: unhash }, id)
 	}
