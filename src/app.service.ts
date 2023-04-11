@@ -4,6 +4,6 @@ import * as dateFns from 'date-fns'
 @Injectable()
 export class AppService {
 	async getHello() {
-		return { identifier: 'EMPA API', datetime: dateFns.format(new Date(), 'yyyy-MM-dd HH:mm:ss') }
+		return { identifier: process.env.APP_NAME, datetime: dateFns.format(new Date(), 'yyyy-MM-dd HH:mm:ss') }
 	}
 }
