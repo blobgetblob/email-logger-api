@@ -16,10 +16,15 @@ import { AssetsController } from './assets/assets.controller'
 		TypeOrmModule.forRoot({
 			type: 'mysql',
 			host: process.env.DATABASE_EMPA_HOST,
-			port: parseInt(process.env.DATABASE_EMPA_PORT),
+			port: process.env.DATABASE_EMPA_PORT ? +process.env.DATABASE_EMPA_PORT : null,
 			username: process.env.DATABASE_EMPA_USER,
 			password: process.env.DATABASE_EMPA_PASSWORD,
 			database: process.env.DATABASE_EMPA_NAME,
+			extra: process.env.DATABASE_EMPA_SOCKET
+				? {
+						socketPath: process.env.DATABASE_EMPA_SOCKET,
+				  }
+				: {},
 			synchronize: false,
 			autoLoadEntities: true,
 		}),

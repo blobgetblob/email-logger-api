@@ -71,7 +71,7 @@ export class AssetsService {
 			order: { asset_id: 'ASC' },
 			where: {
 				deleted: false,
-				asset_id: id,
+				asset_id: Number(id),
 			},
 		})
 		if (!one) {
@@ -105,7 +105,7 @@ export class AssetsService {
 			order: { asset_id: 'ASC' },
 			where: {
 				deleted: false,
-				asset_id: id,
+				asset_id: Number(id),
 			},
 		})
 		if (!one) {

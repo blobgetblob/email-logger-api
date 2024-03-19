@@ -1,5 +1,7 @@
 FROM node:16.8-alpine3.11 as builder
 
+ENV PORT=$PORT
+
 WORKDIR /home/node
 
 COPY . /home/node
@@ -17,6 +19,7 @@ RUN npm ci \
 FROM node:16.8-alpine3.11
 
 ENV NODE_ENV production
+ENV PORT=$PORT
 
 USER node
 WORKDIR /home/node
