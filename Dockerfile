@@ -1,5 +1,7 @@
 FROM node:16.8-alpine3.11 as builder
 
+RUN apk --no-cache add curl
+
 ENV PORT=$PORT
 
 WORKDIR /home/node
@@ -17,6 +19,8 @@ RUN npm ci \
 # ---
 
 FROM node:16.8-alpine3.11
+
+RUN apk --no-cache add curl
 
 ENV NODE_ENV production
 ENV PORT=$PORT
