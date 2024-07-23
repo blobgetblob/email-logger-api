@@ -4,6 +4,7 @@ import { Repository } from 'typeorm'
 import { Email } from './entities/email.entity'
 import { ImapFlow } from 'imapflow'
 import { simpleParser } from 'mailparser'
+import { EmailFilterQueryDto } from './dtos/email-filter-query.dto'
 @Injectable()
 export class EmailsService {
 	constructor(
@@ -23,7 +24,7 @@ export class EmailsService {
 		})
 	}
 
-	async findAll(identity: any) {
+	async logger(identity: any) {
 		const client = new ImapFlow({
 			host: 'mail.fastpanel.website',
 			port: 993,
@@ -89,7 +90,27 @@ export class EmailsService {
 		return fullMessages
 	}
 
-	async findOne(identity: any, id: string) {
-		return []
+	async findAll(identity: any, dto: EmailFilterQueryDto) {
+		const where = {} as any
+		if (dto.email) {
+			where.email = dto.email
+		}
+		if (dto.type) {
+			where.type = dto.type
+		}
+		const all = await this.emailRepostiory.find({ where: where })
+		return { data: all, length: all.length }
+	}
+
+	async deleteAll(identity: any, dto: EmailFilterQueryDto) {
+		const where = {} as any
+		if (dto.email) {
+			where.email = dto.email
+		}
+		if (dto.type) {
+			where.type = dto.type
+		}
+		await this.emailRepostiory.delete(where)
+		return { success: true }
 	}
 }
