@@ -35,7 +35,8 @@ async function bootstrap() {
 
 	app.enableCors()
 
+	console.log(JSON.stringify(process.env))
+
 	await app.listen(process.env.PORT || 4000)
 }
-
 bootstrap()
