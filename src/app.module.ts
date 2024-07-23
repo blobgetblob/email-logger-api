@@ -6,8 +6,7 @@ import { AppController } from './app.controller'
 import { AppService } from './app.service'
 import { AuthController } from './auth/auth.controller'
 import { GatekeeperMiddleware } from './common/middlewares/gatekeeper.middleware'
-import { DocumentsModule } from './assets/assets.module'
-import { AssetsController } from './assets/assets.controller'
+import { EmailsModule } from './emails/emails.module'
 
 @Module({
 	imports: [
@@ -15,20 +14,20 @@ import { AssetsController } from './assets/assets.controller'
 		ConfigModule.forRoot({ isGlobal: true }),
 		TypeOrmModule.forRoot({
 			type: 'mysql',
-			host: process.env.DATABASE_EMPA_HOST,
-			port: process.env.DATABASE_EMPA_PORT ? +process.env.DATABASE_EMPA_PORT : null,
-			username: process.env.DATABASE_EMPA_USER,
-			password: process.env.DATABASE_EMPA_PASSWORD,
-			database: process.env.DATABASE_EMPA_NAME,
-			extra: process.env.DATABASE_EMPA_SOCKET
+			host: process.env.DATABASE_EMLOG_HOST,
+			port: process.env.DATABASE_EMLOG_PORT ? +process.env.DATABASE_EMLOG_PORT : null,
+			username: process.env.DATABASE_EMLOG_USER,
+			password: process.env.DATABASE_EMLOG_PASSWORD,
+			database: process.env.DATABASE_EMLOG_NAME,
+			extra: process.env.DATABASE_EMLOG_SOCKET
 				? {
-						socketPath: process.env.DATABASE_EMPA_SOCKET,
+						socketPath: process.env.DATABASE_EMLOG_SOCKET,
 				  }
 				: {},
 			synchronize: false,
 			autoLoadEntities: true,
 		}),
-		DocumentsModule,
+		EmailsModule,
 	],
 	controllers: [AppController, AuthController],
 	providers: [AppService],

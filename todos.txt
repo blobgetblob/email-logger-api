@@ -1,4 +1,0 @@
-for demplon
-- all status counters
-- waiting_for_feedback tickets and counters
-- waiting_for_response tickets and counters
