@@ -75,7 +75,7 @@ export class EmailsService {
 					if (link.match(/_n\/emaillogin/i)) {
 						topush.type = 'ig_login_by_email'
 					} else if (link.match(/password\/reset/i)) {
-						topush.type = 'ig_password_by_email'
+						topush.type = 'ig_reset_password_by_email'
 					}
 					if (topush?.type) {
 						const create = this.emailRepostiory.create(topush)
