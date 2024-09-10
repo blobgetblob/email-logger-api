@@ -54,7 +54,7 @@ export class EmailsService {
 			const subject = message?.envelope?.subject ?? ''
 			const from = message?.envelope?.from?.[0]?.address ?? ''
 			const to = message?.envelope?.to?.[0]?.address ?? ''
-			if (from && to && subject.match(/made it easy to get back on/i)) {
+			if (from && to && subject.match(/made it easy to get back on|kami sudah memudahkan/i)) {
 				let { content } = await client.download(message.seq)
 				const buf = await this.concat(content)
 				const parser = await simpleParser(buf)
